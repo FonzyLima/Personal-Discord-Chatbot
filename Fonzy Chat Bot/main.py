@@ -1,7 +1,7 @@
 import discord
 import random
 
-TOKEN = "ODg0MDg0NDYwMzU2NzY3Nzg0.YTTV0A.uGIzF_o2HHkdWDaj4BZORd4oCBM"
+#TOKEN = "ODg0MDg0NDYwMzU2NzY3Nzg0.YTTV0A.hhnTNHQE-sznjYAGU7EeEdp74xw"
 
 client = discord.Client()
 
@@ -20,7 +20,24 @@ async def on_message(message):
 
     
     if channel == "chat-fonzy":
-        if user_message.lower() == "hello":
-            await message.channel.send(f"Hello {username}!")
+        if "hello" in user_message.lower() or user_message.lower() == "hi":
+            await message.channel.send(f"ulol pakyu @{username}! tanginang hello yan")
             return
+        if username == "madeleine":
+            await message.channel.send("Madeleine panget")
+            return
+        if username == "leigh" or username == "pinxx" or username == "bea b":
+            await message.channel.send(f"lul @{username} amoy boorat")
+            return
+
+    if channel == "music":
+        await message.channel.send("Hey I like that song too! :>")
+        return
+
+    if channel == "noodles":
+        if "teleparty" in user_message.lower():
+            await message.channel.send("wow u made this time sanaolways")
+            return
+        
+    
 client.run(TOKEN)
