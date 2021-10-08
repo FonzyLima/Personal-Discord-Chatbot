@@ -4,11 +4,13 @@ from discord.ext import commands, tasks
 from itertools import cycle
 
 SERVER_ID = 852898118911131679
-TOKEN = "ODg0MDg0NDYwMzU2NzY3Nzg0.YTTV0A._OpbuD4TEjA1DLuHwhYPGbjCUPc"
+TOKEN = "ODg0MDg0NDYwMzU2NzY3Nzg0.YTTV0A.JgFCcdXoDzA_8RcqSaJUJdSZMY0"
 
 intents = discord.Intents.all()
 intents.members = True
 client = commands.Bot(command_prefix = "$", intents=intents)
+
+# List of statuses to be displayed
 status = cycle(["MOBDEVE","CSNETWK","CSMODEL","CSSWENG"])
 
 
@@ -16,6 +18,12 @@ status = cycle(["MOBDEVE","CSNETWK","CSMODEL","CSSWENG"])
 async def on_ready():
     change_status.start()
     print("We have logged in as {0.user}".format(client))
+
+@tasks.loop(seconds=60)
+async def change_status():
+    await client.change_presence(activity=discord.Game(next(status)))
+    #await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Lupang Hinirang"))
+
 
 @client.event
 async def on_command_error(ctx, error):
@@ -49,8 +57,9 @@ async def play(ctx):
     if(ctx.author.voice):
         channel = ctx.message.author.voice.channel
         voice = await channel.connect()
-        source = FFmpegPCMAudio("ABC.wav")
+        source = FFmpegPCMAudio("april.wav")
         player = voice.play(source)
+        await ctx.send("Now Playing Music")
     return
 
 @client.command(pass_context=True)
@@ -58,9 +67,5 @@ async def leave(ctx):
     await ctx.voice_client.disconnect()
     return
 
-@tasks.loop(seconds=60)
-async def change_status():
-    await client.change_presence(activity=discord.Game(next(status)))
-    #await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Lupang Hinirang"))
 
 client.run(TOKEN)
