@@ -1,10 +1,11 @@
+import os
 import discord
 from discord import FFmpegPCMAudio
 from discord.ext import commands, tasks
 from itertools import cycle
 
-SERVER_ID = 852898118911131679
-TOKEN = "ODg0MDg0NDYwMzU2NzY3Nzg0.YTTV0A.JgFCcdXoDzA_8RcqSaJUJdSZMY0"
+SERVER_ID = os.environ.get('SERVER_ID')
+TOKEN = os.environ.get('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
 intents.members = True
