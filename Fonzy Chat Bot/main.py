@@ -5,7 +5,7 @@ from discord.ext import commands, tasks
 from itertools import cycle
 
 SERVER_ID = os.environ.get('SERVER_ID')
-TOKEN = os.environ.get('DISCORD_TOKEN')
+TOKEN = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
 intents.members = True
