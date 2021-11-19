@@ -64,6 +64,16 @@ async def play(ctx):
     return
 
 @client.command(pass_context=True)
+async def study(ctx):
+    if(ctx.author.voice):
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio("Studymusic.wav")
+        player = voice.play(source)
+        await ctx.send("Now Playing Study Music")
+    return
+    
+@client.command(pass_context=True)
 async def leave(ctx):
     await ctx.voice_client.disconnect()
     return
